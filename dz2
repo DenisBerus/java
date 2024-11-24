@@ -1,0 +1,93 @@
+//1
+class URLBuilder {
+	public static String buildURL(String baseURL, String params) {
+		StringBuilder url = new StringBuilder(baseURL);
+		String[] pairs = params.split("&");
+		for (int i = 0; i < pairs.length; i++) {
+			String[] keyValue = pairs[i].split("=");
+			if (!"null".equals(keyValue[1])) {
+				if (i > 0) {
+					url.append("&");
+				}
+url.append(keyValue[0]).append("=").append(keyValue[1]);
+			}
+		}
+		return url.toString();
+	}
+}
+
+public class Printer {
+	public static void main(String[] args) {
+		String baseURL = "";
+		String params = "";
+		if (args.length == 0) {
+			baseURL = "https://example.com/search?";
+			params = "query=java&sort=desc&filter=null";
+		} else {
+			baseURL = args[0];
+			params = args[1];
+		}
+		URLBuilder ans = new URLBuilder();
+		System.out.println(ans.buildURL(baseURL, params));
+	}
+}
+
+//2
+class CSVGenerator {
+	public static String generateCSV(String[] headers, String[][]data) {
+		StringBuilder csv = new StringBuilder();
+		csv.append(String.join(",", headers)).append("\n");
+		for (String[] row : data) {
+			csv.append(String.join(",", row)).append("\n");
+		}
+		return csv.toString().trim(); 
+	}
+}
+
+public class Printer {
+	public static void main(String[] args) {
+		String[] headers = {};
+		String[][] data = {};
+		if (args.length == 0) {
+			headers = new String[]{"Name", "Age", "City"};
+			data = new String[][] {
+				{"John", "30", "New York"},
+				{"Alice", "25", "Los Angeles"},
+				{"Bob", "35", "Chicago"}
+			};
+		} else {
+		}
+		CSVGenerator ans = new CSVGenerator();
+		System.out.println(ans.generateCSV(headers, data));
+	}
+}
+
+//3
+class TextCleaner {
+	public static String removeEmptyLines(String text) {
+		String[] lines = text.split("\n");
+		StringBuilder cleanedText = new StringBuilder();
+		for (String line : lines) {
+			if (!line.trim().isEmpty()) {
+				if (cleanedText.length() > 0) {
+					cleanedText.append("\n");
+				}
+				cleanedText.append(line);
+			}
+		}
+		return cleanedText.toString();
+	}
+}
+
+public class Printer {
+	public static void main(String[] args) {
+		String text = "";
+		if (args.length == 0) {
+			text = "line1\n\nline2\n\nline3";
+		} else {
+			text = args[0];
+		}
+		TextCleaner ans = new TextCleaner();
+		System.out.println(ans.removeEmptyLines(text));
+	}
+}
