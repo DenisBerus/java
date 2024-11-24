@@ -1,0 +1,111 @@
+//1
+import java.util.LinkedList;
+class LLTasks {
+	public static void removeOddLengthStrings(LinkedList<String> ll)
+{
+		LinkedList<String> toRemove = new LinkedList<>();
+		for (String s : ll) {
+			if (s.length() % 2 != 0) {
+				toRemove.add(s);
+			}
+		}
+		ll.removeAll(toRemove);
+	}
+}
+
+public class Printer {
+	public static void main(String[] args) {
+		LinkedList<String> ll = new LinkedList<>();
+		if (args.length == 0) {
+
+			ll.add("apple");
+			ll.add("banana");
+			ll.add("pear");
+			ll.add("grape");
+		} else {
+			for (String arg : args) {
+				ll.add(arg);
+			}
+		}
+		LLTasks answer = new LLTasks();
+		System.out.println(ll);
+		answer.removeOddLengthStrings(ll);
+		System.out.println(ll);
+	}
+}
+
+//2
+import java.util.LinkedList;
+class MyStack {
+	private LinkedList<String> stack = new LinkedList<>();
+	public void push(String element) {
+		stack.addFirst(element);
+	}
+	public String pop() {
+		return stack.removeFirst();
+	}
+	public String peek() {
+		return stack.peekFirst();
+	}
+	public LinkedList<String> getElements() {
+		return new LinkedList<>(stack);
+	}
+}
+
+public class Printer {
+	public static void main(String[] args) {
+		MyStack stack = new MyStack();
+		if (args.length == 0) {
+
+			stack.push("apple");
+			stack.push("banana");
+			stack.push("pear");
+			stack.push("grape");
+		} else {
+			for (String arg : args) {
+				stack.push(arg);
+			}
+		}
+		System.out.println(stack.getElements());
+		System.out.println(stack.pop());
+		System.out.println(stack.getElements());
+		System.out.println(stack.peek());
+	}
+}
+
+//3
+import java.util.LinkedList;
+class ListUtils {
+	public static int countOccurrences(LinkedList<String> list, String value) {
+		int count = 0;
+		for (String s : list) {
+			if (s.equals(value)) {
+				count++;
+			}
+		}
+		return count;
+	}
+}
+
+public class Printer {
+	public static void main(String[] args) {
+		LinkedList<String> list = new LinkedList<>();
+		String value;
+		if (args.length < 2) {
+
+			list.add("apple");
+			list.add("banana");
+			list.add("apple");
+			list.add("pear");
+			list.add("banana");
+			value = "apple";
+		} else {
+			for (int i = 0; i < args.length - 1; i++) {
+				list.add(args[i]);
+			}
+			value = args[args.length - 1];
+		}
+		ListUtils utils = new ListUtils();
+		System.out.println("Occurrences of \"" + value + "\": " + utils.countOccurrences(list, value));
+	}
+}
